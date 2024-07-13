@@ -5,7 +5,9 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:vincentking/18-alpine'
+                    unset DOCKER_HOST
+                    docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+                    image 'node:18-alpine'
                     reuseNode true
                 }
             }
